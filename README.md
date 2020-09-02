@@ -13,12 +13,12 @@ Use **SEC 13F filings** and *whalescores* to build a model based on fund perform
   -	Form 13F is a quarterly report filed, per United States Securities and Exchange Commission regulations, by "institutional investment managers" with control over $100M in assets to the SEC, listing all equity assets under management
   -	Index ETFs for the S&P 500 sectors
 
-- The kinds of questions you will ask of the data
+- The kinds of questions we will ask of the data
   -	Identify top performing funds
   -	Identify investment sector weightings for top performing funds
   -	What are the most common terms/names mentioned within each investment sector
   
-- One or more data sources that will meet your requirements
+- One or more data sources that will meet our requirements
   -	[Whalewisdom.com](https://whalewisdom.com/)
   -	[Validea.com](https://www.validea.com/)
   -	[Sec.gov_edgar](https://www.sec.gov/edgar.shtml)
@@ -35,7 +35,7 @@ There are minimum criteria required to be included:
 - Holdings must be between 5 and 750
 
 ## About Sector ETFs   
-SPDR provides unique Exchange Traded Funds (ETFs) that divide the S&P into eleven index funds traded throughout the day on NYSE Arca.
+**SPDR** provides unique Exchange Traded Funds (ETFs) that divide the S&P into eleven index funds traded throughout the day on NYSE Arca.
 
 - Breakdown of industry sectors by the 11 sector ETFs:
   - Materials - **XLB**
@@ -54,30 +54,30 @@ SPDR provides unique Exchange Traded Funds (ETFs) that divide the S&P into eleve
 
 ## Model Structure   
 The basic idea is to separate modeling into two parts and put them back together when they’re done.   
-> Part 1: Getting a specific weight on each sector by feeding historical weights of the most successful hedge funds (Dataset can be achieved from EDGAR and Whalewisdom)        
+- Part 1: Getting a specific weight on each sector by feeding historical weights of the most successful hedge funds (Dataset can be achieved from EDGAR and Whalewisdom)        
    
 
-> Part 2: Getting a yearly or quarterly return for each index ETF that will represent each sector in Part 1.
+- Part 2: Getting a yearly or quarterly return for each index ETF that will represent each sector in Part 1.
 At the end of the day, we can combine the results to get an idea of what weights will make the optimized sector allocation for our optimized portfolio.
 
 ### Structure  
        
-> Part 1:
-1.	Determine which funds to be selected for our project
-(Could be top-n (3, 5, 10..) best performed ones or other standards that we may consider proper)
-2.	Pulling the quarterly 13-F data from Whalewisdom for the selected funds
-3.	Define the features and outputs. 
-(Ideally features should be weightings on each sector quarterly that spitting out optimized weightings for output that would have given the best portfolio return over that time periods. However, building this kind of model could be difficult to implement.)
+- Part 1:
+>  1.	Determine which funds to be selected for our project
+      (Could be top-n (3, 5, 10..) best performed ones or other standards that we may consider proper)
+   2.	Pulling the quarterly 13-F data from Whalewisdom for the selected funds
+   3.	Define the features and outputs. 
+      (Ideally features should be weightings on each sector quarterly that spitting out optimized weightings for output that would have given the best portfolio return over that        time periods. However, building this kind of model could be difficult to implement.)
 
-> Part 2: 
-1.	Define which index ETF matching with which sector in Part 1.
-2.	Determine the period that we are going to analyze (probably starting with OCT 1, 2018 when the reclassification started)
-3.	Pulling each ETF’s historical data from APIs (Alpaca)
-4.	Data preprocessing with the data. Need to apply the time-series way of splitting it.
-(Features = daily closing price, Output = daily closing price (using rolling window))
-5.	Build and Train the model using RNN LSTM model
-6.	Predict the data using test dataset
-7.	Evaluate the model
+- Part 2: 
+> 1.	Define which index ETF matching with which sector in Part 1.
+  2.	Determine the period that we are going to analyze (probably starting with OCT 1, 2018 when the reclassification started)
+  3.	Pulling each ETF’s historical data from APIs (Alpaca)
+  4.	Data preprocessing with the data. Need to apply the time-series way of splitting it.
+     (Features = daily closing price, Output = daily closing price (using rolling window))
+  5.	Build and Train the model using RNN LSTM model
+  6.	Predict the data using test dataset
+  7.	Evaluate the model
 
 After completing both parts, we can simulate a portfolio by using the weights recommended from Part 1, applying them to relevant ETFs to see the result (prediction). 
 Since we don’t know the exact dates when the hedge funds rebalanced their weights on each sector during a certain quarter, we need to assume that they did in the middle of the quarter(45 days after the quarter starts) for our simulated portfolio.
