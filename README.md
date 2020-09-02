@@ -62,15 +62,15 @@ At the end of the day, we can combine the results to get an idea of what weights
 
 ### Structure  
        
-- Part 1:
->  1.	Determine which funds to be selected for our project
+- **Part 1:**
+   1.	Determine which funds to be selected for our project
       (Could be top-n (3, 5, 10..) best performed ones or other standards that we may consider proper)
    2.	Pulling the quarterly 13-F data from Whalewisdom for the selected funds
    3.	Define the features and outputs. 
       (Ideally features should be weightings on each sector quarterly that spitting out optimized weightings for output that would have given the best portfolio return over that        time periods. However, building this kind of model could be difficult to implement.)
 
-- Part 2: 
-> 1.	Define which index ETF matching with which sector in Part 1.
+- **Part 2:** 
+  1.	Define which index ETF matching with which sector in Part 1.
   2.	Determine the period that we are going to analyze (probably starting with OCT 1, 2018 when the reclassification started)
   3.	Pulling each ETF’s historical data from APIs (Alpaca)
   4.	Data preprocessing with the data. Need to apply the time-series way of splitting it.
