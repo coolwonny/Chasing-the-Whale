@@ -2,8 +2,8 @@
  
 
 ![whale_tail](https://github.com/coolwonny/Chasing-the-Whale/blob/master/Images/whale-tail.jpg)    
----
-by Marcus S Kim  
+--- 
+### by Marcus S Kim  
 ---
 ## Project Goal
 Use **SEC 13F filings** and *whalescores* to build a model based on fund performance and investor sector weightings that will outperform the S&P 500 in annual return.
@@ -150,8 +150,9 @@ Here is the result, we plotted out each of portfolio return against market retur
 
 Next part is using machine learning to forecast the performance after 30 days from now to make sure the optimized portfolio can have sustainable performance over market down the road. We used Linear Regression, ARIMA and SARIMAX and RNN LSTM model as our data is time-series. All the models predicted well enough with given test data. But the problem we had was how to forecast portfolio returns 30 days from now on.
 
+![prediction_ARIMA](https://github.com/coolwonny/Chasing-the-Whale/blob/master/Images/prediction_best_quarterly.png)
 
-The only model can give an answer to this was ARIMA and SARIMAX, cuz they do not need a certain test data to predict the future. So here’s the prediction from ARIMA. The implication is that we can expect our portfolio keep outperforming over market predicted return in the next 30 days, according to ARIMA model.
+The only model can give an answer to this was ARIMA and SARIMAX, because they do not need a certain test data to predict the future. So here’s the prediction from ARIMA. The implication is that we can expect our portfolio keep outperforming over market predicted return in the next 30 days, according to ARIMA model.
 
 ## Conclusion
 Our research explains why we should not just follow the optimization method in the real world. 
