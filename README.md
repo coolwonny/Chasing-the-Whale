@@ -92,39 +92,35 @@ Unfortunately, we could not come up with creating a set of optimized weightings 
 
 Another approach was using `cvxpy` library. We might be using it finding the optimal weights by defining a function applying `cvx.Minimize()` as below.    
 
-`import cvxpy as cvx`
-
-`def get_optimal_weights(covariance_returns, index_weights, scale=2.0):`   
-
-  ` """ `
-   ` Find the optimal weights.`
-
-   ` Parameters`   
-   ` ----------`   
-    `covariance_returns : 2 dimensional Ndarray`   
-       ` The covariance of the returns`   
-    `index_weights : Pandas Series`   
-        `Index weights for all tickers at a period in time`   
-    `scale : int`   
-        `The penalty factor for weights the deviate from the index `   
-    `Returns`   
-    `-------`   
-    `x : 1 dimensional Ndarray`   
-    `    The solution for x`   
-    `"""`   
-    `assert len(covariance_returns.shape) == 2`   
-    `assert len(index_weights.shape) == 1`   
-    `assert covariance_returns.shape[0] == covariance_returns.shape[1]  == index_weights.shape[0]`   
-    
-   ` m = covariance_returns.shape[0]`   
-   ` x = cvx.Variable(m)`
-    
-   ` objective = cvx.Minimize(cvx.quad_form(x, covariance_returns) + scale * cvx.norm(x - index_weights))`   
-   ` constraints = [x >= 0, sum(x) == 1]`   
-    `problem = cvx.Problem(objective, constraints)`   
-   ` problem.solve()`   
-       
-  `return x.value`
+```
+import cvxpy as cvx
+def get_optimal_weights(covariance_returns, index_weights, scale=2.0):
+    """
+    Find the optimal weights.
+    Parameters
+    ----------
+    covariance_returns : 2 dimensional Ndarray
+        The covariance of the returns
+    index_weights : Pandas Series
+        Index weights for all tickers at a period in time
+    scale : int
+        The penalty factor for weights the deviate from the index 
+    Returns
+    -------
+    x : 1 dimensional Ndarray
+        The solution for x
+    """
+    assert len(covariance_returns.shape) == 2
+    assert len(index_weights.shape) == 1
+    assert covariance_returns.shape[0] == covariance_returns.shape[1]  == index_weights.shape[0]
+    m = covariance_returns.shape[0]
+    x = cvx.Variable(m)
+    objective = cvx.Minimize(cvx.quad_form(x, covariance_returns) + scale * cvx.norm(x - index_weights))
+    constraints = [x >= 0, sum(x) == 1]
+    problem = cvx.Problem(objective, constraints)
+    problem.solve()
+    return x.value
+```    
 
 As a result, we could not figure out how to apply the above function to generate 11 different optimized weights that becomes 100% when summing up.
 
