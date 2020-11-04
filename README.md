@@ -3,7 +3,7 @@
 
 ![whale_tail](https://github.com/coolwonny/Chasing-the-Whale/blob/master/Images/whale-tail.jpg)    
 --- 
-### by Marcus S Kim  
+### by Marcus S Kim, Julas Holie, Aaron Packard, Connor Gross
 ---
 ## Project Goal
 Use **SEC 13F filings** and *whalescores* to build a model based on fund performance and investor sector weightings that will outperform the S&P 500 in annual return.
